@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MovieRequest;
+use App\Models\Category;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 
@@ -54,5 +55,12 @@ class MovieController extends Controller
 		$movie->delete();
 
 		return response()->json(null, 204);
+	}
+
+	public function showByCategory(Category $category)
+	{
+		$movies = $category->movies();
+
+		return response()->json($movies, 200);
 	}
 }

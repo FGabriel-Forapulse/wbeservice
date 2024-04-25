@@ -6,20 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Movie extends Model
+class Category extends Model
 {
 	use HasFactory;
 
 	protected $fillable = [
 		'name',
-		'description',
-		'release_at',
-		'rating',
-		'image',
 	];
 
-	public function category(): BelongsToMany
+	public function movies(): BelongsToMany
 	{
-		return $this->belongsToMany(Category::class, 'category_user');
+		return $this->belongsToMany(Movie::class, 'category_user');
 	}
 }
