@@ -18,8 +18,8 @@ class Movie extends Model
 		'image',
 	];
 
-	public function category(): BelongsToMany
+	public function categories(): BelongsToMany
 	{
-		return $this->belongsToMany(Category::class, 'category_user');
+		return $this->belongsToMany(Category::class);
 	}
 }

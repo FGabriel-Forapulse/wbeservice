@@ -19,7 +19,8 @@ class MovieController extends Controller
 		return response()->json($movies, 200);
 	}
 
-	public function search(Request $request) {
+	public function search(Request $request)
+	{
 		$movies = Movie::where('name', 'like', '%' . $request->input('search') . '%')->orWhere('description', 'like', '%' . $request->input('search') . '%')->paginate(15);
 
 		return response()->json($movies, 200);
@@ -67,8 +68,19 @@ class MovieController extends Controller
 
 	public function showByCategory(Category $category)
 	{
-		$movies = $category->movies();
+		$movies = $category->movies()->get();
 
 		return response()->json($movies, 200);
+	}
+
+	public function linkToCategory(Movie $movie, Category $category)
+	{
+		if ($movie->categories()->where('categories.id', $category->id)->exists()) {
+			return response()->json(['message' => 'Ce film est déjà relié à cette catégorie!'], 422);
+		}
+
+		$movie->categories()->attach($category);
+
+		return response()->json(['message' => 'Le film a été relié à la catégorie avec succés!'], 200);
 	}
 }
