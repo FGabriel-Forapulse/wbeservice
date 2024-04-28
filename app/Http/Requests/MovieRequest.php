@@ -11,7 +11,7 @@ class MovieRequest extends FormRequest
 	 */
 	public function authorize(): bool
 	{
-		return false;
+		return true;
 	}
 
 	/**
@@ -26,6 +26,7 @@ class MovieRequest extends FormRequest
 			'description' => ['required', 'max:2048'],
 			'release_date' => ['required', 'date'],
 			'rating' => ['nullable', 'integer', 'min:0', 'max:5'],
+			'image' => 'nullable|file',
 		];
 	}
 }

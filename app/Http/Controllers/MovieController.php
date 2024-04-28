@@ -43,6 +43,8 @@ class MovieController extends Controller
 	public function update(MovieRequest $request, Movie $movie)
 	{
 		$movie->update($request->validated());
+		$movie->image = $request->image('image')->store('moviePosters');
+		$movie->save();
 
 		return response()->json($movie, 200);
 	}

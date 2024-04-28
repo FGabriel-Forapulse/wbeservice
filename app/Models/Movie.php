@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Movie extends Model
 {
-	use HasFactory;
+	//use HasFactory;
 
 	protected $fillable = [
 		'name',
 		'description',
-		'release_at',
+		'release_date',
 		'rating',
 		'image',
 	];
