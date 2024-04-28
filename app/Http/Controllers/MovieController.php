@@ -19,6 +19,12 @@ class MovieController extends Controller
 		return response()->json($movies, 200);
 	}
 
+	public function search(Request $request) {
+		$movies = Movie::where('name', 'like', '%' . $request->input('search') . '%')->orWhere('description', 'like', '%' . $request->input('search') . '%')->paginate(15);
+
+		return response()->json($movies, 200);
+	}
+
 	/**
 	 * Store a newly created resource in storage.
 	 */
